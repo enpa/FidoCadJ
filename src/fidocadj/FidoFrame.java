@@ -836,8 +836,9 @@ public final class FidoFrame extends JFrame implements
     public void zoomToFit()
     {
         // If the drawing is empty, there's no need to go further.
-        if(circuitPanel.getDrawingModel().isEmpty())
+        if(circuitPanel.getDrawingModel().isEmpty()) {
             return;
+        }
         //double oldz=cc.getMapCoordinates().getXMagnitude();
 
         // Check for ghost primitives (hidden outside the drawing area)
