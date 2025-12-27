@@ -411,6 +411,8 @@ public final class LibUtils
         throws IOException
     {
         try {
+            String s=getLibDir();
+
             // This is an hack: at first, we create a temporary file. We store
             // its name and we use it to create a temporary directory.
             File tempDir = File.createTempFile("fidocadj_", "");
@@ -424,12 +426,12 @@ public final class LibUtils
                     "saveLibraryState: Can not create temp directory.");
             }
 
-            String s=getLibDir();
 
             String d=tempDir.getAbsolutePath();
 
-            // We copy all the contents of the current library directory in the
-            // temporary directory.
+
+            // We copy all the contents of the current library directory
+            // in the temporary directory.
             File sourceDir = new File(s);
             File destinationDir = new File(d);
             FileUtils.copyDirectoryNonRecursive(sourceDir, destinationDir,
@@ -440,8 +442,10 @@ public final class LibUtils
             if(ua != null) {
                 ua.saveUndoLibrary(d);
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Library directory has not been defined, yet.");
         } catch (IOException e) {
-            System.out.println("Cannot save the library status.");
+            System.out.println("Cannot save the library status: "+e);
         }
     }
 }
